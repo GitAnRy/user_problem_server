@@ -4,11 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/users.model';
 
+//задаем настройки конфигурации приложения 
 @Module({
   imports: [
+    //подключаем файл env
     ConfigModule.forRoot({
       envFilePath:`.${process.env.NODE_ENV}.env`
     }),
+    //конфигурация базы данных
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -19,6 +22,7 @@ import { User } from './users/users.model';
       synchronize: true,
       autoLoadEntities: true
     }),
+    //подключаем модуль приложения
     UsersModule],
   controllers: [],
   providers: [],

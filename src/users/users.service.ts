@@ -11,6 +11,7 @@ export class UsersService {
         private userRepository: Repository<User>
     ) {}
 
+    //возвращает количество пользователей с флагом problem - true и меняет его на false
     async getCountProblems() {
         const updateResult: UpdateResult = await this.userRepository.createQueryBuilder()
         .update(User, {problem: false})
@@ -23,6 +24,7 @@ export class UsersService {
         }
     }
 
+    //заполняем БД данными
     async startCreateDB() {
 
         const miliss: number = (new Date).getTime();
@@ -48,6 +50,7 @@ export class UsersService {
         return c - miliss;
     }
 
+    //генерация случайных данных
     async generateNames(namesArray: string[], lastNArray: string[], ageArray: number[], genderArray: string[], problemArray: boolean[]) {
 
         const names = require('../data-user').names;
@@ -65,6 +68,7 @@ export class UsersService {
 
     }
 
+    //заполняем БД частями
     async savePart(namesArray: string[], lastNArray: string[], ageArray: number[], genderArray: string[], problemArray: boolean[]) {
 
         const poprNames = Math.floor(Math.random() * 100);
@@ -90,6 +94,7 @@ export class UsersService {
         this.userRepository.save(list);
     }
 
+    //очищаем БД
     async clearDB() {
 
         const miliss: number = (new Date).getTime();
